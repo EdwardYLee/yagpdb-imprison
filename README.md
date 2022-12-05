@@ -5,6 +5,7 @@ Custom YAGPDB Command to move users to and from dedicated mute channels. This co
 
 Usage:
   /imprison @User @MutedRole
+  
   /release @User
 
 
