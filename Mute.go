@@ -41,7 +41,6 @@
 		{{ if $member }}
 			{{ $previousRoles = $member.Roles }}
 			
-			
 			{{ range $index, $role := $member.Roles }}
 				{{- takeRoleID $member.User.ID $role -}} 
 			{{- end }}
