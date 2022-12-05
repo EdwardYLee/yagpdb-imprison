@@ -48,5 +48,5 @@
 {{ end }}
 
 {{ if $foundMutedRole }}
-	{{ print "<@" $member.User.ID ">" "has been releaseed from <#" ($mutedRoleChannelDict.Get $foundMutedRole) ">" }}
+	{{ print "<@" $member.User.ID ">" "has been released from <#" ($mutedRoleChannelDict.Get $foundMutedRole) ">" }}
 {{ end }}
