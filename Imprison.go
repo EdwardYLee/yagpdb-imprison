@@ -1,3 +1,4 @@
+
 {{/*
 	Designed for servers with dedicated mute roles and channels. Will store the original roles
 	within a pinned comment on the respecive mute channel and remove all previous roles. 
@@ -6,8 +7,8 @@
 	the number of accounts that have that role.
 	
 	Usage:
-		/mute @user. ***NOT YET IMPLEMENTED***
-		/mute @user @muteRole
+		!imprison @user. ***NOT YET IMPLEMENTED***
+		!imprison @user @muteRole
 		
 	Future Edits:
 		Move muted roles to database with special tag so it can be accessed across commands
@@ -36,6 +37,17 @@
 	{{ end }}
 	
 	{{ if $continueMuting }}
+		{{ if $roleToAssign }}
+			{{ giveRoleID $member.User.ID $roleToAssign.ID }}
+		{{ else }}
+			**Error:** Assigning random unused role still under construction.
+			Add an imprisoned role at the end of the command
+			e.g. !imprison @user @muteRole
+			{{ $continueMuting = 0 }}
+		{{ end }}
+	{{ end }}
+
+	{{ if $continueMuting }}
 		{{ $member = (getMember (index .CmdArgs 0)) }}
 
 		{{ if $member }}
@@ -46,12 +58,7 @@
 			{{- end }}
 			
 			{{ dbSet $member.User.ID "previousRoles" $previousRoles }}
-			{{ if $roleToAssign }}
-				{{ giveRoleID $member.User.ID $roleToAssign.ID }}
-			{{ else }}
-				**Error:** Assigning random unused role still under construction
-			{{ end }}
-		{{ else }}
+					{{ else }}
 			**Error:** Invalid Member ``{{ (index .CmdArgs 0) }}``
 			{{ $continueMuting = 0 }}
 		{{ end }}
